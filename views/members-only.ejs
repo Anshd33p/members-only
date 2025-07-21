@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+   
+</head>
+<body>
+    <h1>Welcome to the Members Only Area</h1>
+    <p>This content is exclusive to members.</p>
+     <!-- Add Message Form -->
+    <div class="message-form">
+        <h3>Add a New Message</h3>
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div style="color: red;"><%= error %></div>
+        <% } %>
+        
+        <form action="/members-only" method="POST">
+            <div>
+                <label for="title">Title:</label><br>
+                <input type="text" id="title" name="title" required style="width: 100%; padding: 8px;">
+            </div>
+            <br>
+            <div>
+                <label for="content">Message:</label><br>
+                <textarea id="content" name="content" rows="4" required style="width: 100%; padding: 8px;"></textarea>
+            </div>
+            <br>
+            <button type="submit">Post Message</button>
+        </form>
+    </div>
+     <!-- Display Messages -->
+    <h3>Recent Messages</h3>
+    <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+        <% messages.forEach(message => { %>
+            <div class="message">
+                <div class="message-header">
+                    <strong><%= message.title %></strong> - 
+                    by <%= message.first_name %> <%= message.last_name %> 
+                    on <%= new Date(message.created_at).toLocaleDateString() %>
+                </div>
+                <p><%= message.content %></p>
+                <div class="message-actions">
+                    <% if (user && (user.id === message.author_id || user.admin)) { %>
+                        <form action="/members-only/delete/<%= message.id %>" method="POST" style="display: inline;">
+                            <button type="submit" style="color: red; background: transparent; border: none; cursor: pointer;">Delete</button>
+                        </form>
+                    <% } %>
+                </div>
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No messages yet. Be the first to post!</p>
+    <% } %>
+
+
+    <a href="/logout">Logout</a>
+</body>
+</html>

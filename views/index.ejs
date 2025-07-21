@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME | Members Only</title>
+    
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to Members Only</h1>
+        <div>
+            <div>
+                <a href="/login">Login</a>
+            </div>
+            <div>
+                <a href="/sign-up">Register</a>
+            </div>
+        </div>
+        
+        
+    </div>
+    <div class="content">
+        <h3>Recent Messages</h3>
+    <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+        <% messages.forEach(message => { %>
+            <div class="message">
+                <div class="message-header">
+                    <strong><%= message.title %></strong> - 
+                    
+                </div>
+                <p><%= message.content %></p>
+                
+            </div>
+        <% }) %>
+    <% } else { %>
+        <p>No messages yet. Be the first to post!</p>
+    <% } %>
+
+    </div>
+</body>
+</html>

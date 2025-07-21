@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    
+</head>
+<body>
+    <form action="login" method="post">
+        <h1>Login</h1>
+        <% if (typeof errors !== 'undefined' && errors) { %>
+            <% errors.forEach(error => { %>
+                <div style="color: red;"><%= error.msg || error %></div>
+            <% }) %>
+        <% } else if (typeof error !== 'undefined' && error) { %>
+            <div style="color: red;"><%= error %></div>
+        <% } %>
+        <% if (typeof messages !== 'undefined' && messages.error) { %>
+        <% messages.error.forEach(function(msg) { %>
+            <div style="color: red; background: #ffebee; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                <%= msg %>
+            </div>
+        <% }); %>
+    <% } %>
+    
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" 
+               value="<%= typeof formData !== 'undefined' ? formData.username || '' : '' %>" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/sign-up">Register here</a></p>
+    <footer>
+        <p>&copy; 2023 Your Company</p>
+    </footer>
+</body>
+</html>

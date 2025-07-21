@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+    <form action="/member" method="post">
+        <h1>Member Area</h1>
+        <% if (typeof errors !== 'undefined' && errors) { %>
+            <% errors.forEach(error => { %>
+                <div style="color: red;"><%= error.msg || error %></div>
+            <% }) %>
+        <% } else if (typeof error !== 'undefined' && error) { %>
+            <div style="color: red;"><%= error %></div>
+        <% } %>
+
+        <label for="memberCode">Member Code:</label>
+        <input type="text" id="memberCode" name="memberCode"
+               value="<%= typeof formData !== 'undefined' ? formData.memberCode || '' : '' %>" required>
+            <button type="submit">submit</button>
+    </form>
+</body>
+</html>
