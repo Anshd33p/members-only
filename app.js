@@ -11,7 +11,7 @@ require("dotenv").config();
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.use(express.urlencoded({ extended: true }));
-
+app.use(express.static("public"));
 
 app.use(
   session({
@@ -79,7 +79,7 @@ app.get("/logout", (req, res) => {
     if (err) {
       return next(err);
     }
-    res.redirect("/login");
+    res.redirect("/");
   });
 });
 

@@ -1,0 +1,258 @@
+/* Members page specific styling - won't affect other templates */
+
+/* Welcome header for members page */
+.members-welcome {
+    text-align: center;
+    color: #4a5568;
+    margin-bottom: 2rem;
+}
+
+/* Two column layout for members page */
+.members-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* Compact form styling for members page */
+.members-form {
+    margin: 0;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: white;
+    border-radius: 15px;
+}
+
+.members-form h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #4a5568;
+    font-size: 1.2rem;
+}
+
+.members-form .form-group {
+    margin-bottom: 1rem;
+}
+
+.members-form label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    color: #4a5568;
+    font-weight: 600;
+}
+
+.members-form input,
+.members-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.members-form input:focus,
+.members-form textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: scale(1.02);
+}
+
+.members-form textarea {
+    resize: vertical;
+}
+
+.members-form .btn {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.members-form .alert {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* Messages section styling */
+.members-messages h3 {
+    margin: 0 0 1rem 0;
+    color: #4a5568;
+    font-size: 1.3rem;
+}
+
+.members-messages-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.members-messages-count {
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.members-messages-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+/* Custom scrollbar for members messages */
+.members-messages-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.members-messages-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.members-messages-scroll::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.members-messages-scroll::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Enhanced message cards for members page */
+.members-message-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.members-message-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.members-message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e2e8f0;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.members-message-info {
+    flex: 1;
+}
+
+.members-message-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 0.3rem;
+}
+
+.members-message-meta {
+    font-size: 0.85rem;
+}
+
+.members-message-author {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.members-message-separator {
+    color: #a0aec0;
+    margin: 0 0.5rem;
+}
+
+.members-message-date {
+    color: #718096;
+}
+
+.members-message-delete {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.members-message-delete form {
+    display: inline;
+}
+
+.members-message-delete .btn-delete {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    background: #f56565;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.members-message-delete .btn-delete:hover {
+    background: #e53e3e;
+    transform: translateY(-1px);
+}
+
+.members-message-content {
+    margin-bottom: 0;
+    line-height: 1.5;
+    color: #4a5568;
+}
+
+/* Empty state for members page */
+.members-empty {
+    text-align: center;
+    padding: 3rem;
+    color: #718096;
+}
+
+.members-empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.members-empty p {
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+/* Admin badge for members page */
+.members-admin-badge {
+    color: #f56565;
+    font-weight: bold;
+}
+
+/* Mobile responsive for members page */
+@media (max-width: 768px) {
+    .members-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .members-form {
+        order: 2;
+    }
+    
+    .members-messages-scroll {
+        max-height: 50vh;
+        order: 1;
+    }
+    
+    .members-welcome {
+        font-size: 1.5rem;
+    }
+    
+    .members-message-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

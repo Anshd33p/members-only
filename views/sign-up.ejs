@@ -4,38 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title || 'Sign Up' %></title>
-    
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-    <form action="/sign-up" method="post">
-        <h1>Sign Up</h1>
+<body class="form-page">
+    <div class="form-container">
+        <h1>Join Our Community</h1>
+        
+        <!-- Error messages -->
         <% if (typeof errors !== 'undefined' && errors) { %>
             <% errors.forEach(error => { %>
-                <div style="color: red;"><%= error.msg || error %></div>
+                <div class="alert alert-error">
+                    <%= error.msg || error %>
+                </div>
             <% }) %>
         <% } else if (typeof error !== 'undefined' && error) { %>
-            <div style="color: red;"><%= error %></div>
+            <div class="alert alert-error">
+                <%= error %>
+            </div>
         <% } %>
+        
+        <form action="/sign-up" method="post">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" 
+                       value="<%= typeof formData !== 'undefined' ? formData.firstName || '' : '' %>" required>
+            </div>
             
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName" 
-               value="<%= typeof formData !== 'undefined' ? formData.firstName || '' : '' %>" required>
-        
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName" 
-               value="<%= typeof formData !== 'undefined' ? formData.lastName || '' : '' %>" required>
-        
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" 
-               value="<%= typeof formData !== 'undefined' ? formData.username || '' : '' %>" required>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" 
+                       value="<%= typeof formData !== 'undefined' ? formData.lastName || '' : '' %>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" 
+                       value="<%= typeof formData !== 'undefined' ? formData.username || '' : '' %>" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
 
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                Create Account
+            </button>
+        </form>
         
-        <button type="submit">Sign Up</button>
-    </form>
+        <p style="text-align: center; margin-top: 1.5rem;">
+            Already have an account? 
+            <a href="/login" style="color: #667eea; text-decoration: none; font-weight: 600;">Login here</a>
+        </p>
+    </div>
 </body>
 </html>

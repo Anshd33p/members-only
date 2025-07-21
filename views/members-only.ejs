@@ -4,57 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-   
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/members.css">
 </head>
-<body>
-    <h1>Welcome to the Members Only Area</h1>
-    <p>This content is exclusive to members.</p>
-     <!-- Add Message Form -->
-    <div class="message-form">
-        <h3>Add a New Message</h3>
-        <% if (typeof error !== 'undefined' && error) { %>
-            <div style="color: red;"><%= error %></div>
-        <% } %>
-        
-        <form action="/members-only" method="POST">
-            <div>
-                <label for="title">Title:</label><br>
-                <input type="text" id="title" name="title" required style="width: 100%; padding: 8px;">
-            </div>
-            <br>
-            <div>
-                <label for="content">Message:</label><br>
-                <textarea id="content" name="content" rows="4" required style="width: 100%; padding: 8px;"></textarea>
-            </div>
-            <br>
-            <button type="submit">Post Message</button>
-        </form>
-    </div>
-     <!-- Display Messages -->
-    <h3>Recent Messages</h3>
-    <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
-        <% messages.forEach(message => { %>
-            <div class="message">
-                <div class="message-header">
-                    <strong><%= message.title %></strong> - 
-                    by <%= message.first_name %> <%= message.last_name %> 
-                    on <%= new Date(message.created_at).toLocaleDateString() %>
-                </div>
-                <p><%= message.content %></p>
-                <div class="message-actions">
-                    <% if (user && (user.id === message.author_id || user.admin)) { %>
-                        <form action="/members-only/delete/<%= message.id %>" method="POST" style="display: inline;">
-                            <button type="submit" style="color: red; background: transparent; border: none; cursor: pointer;">Delete</button>
-                        </form>
+<body class="normal-layout">
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-content">
+                <div class="logo">🔐 Members Only</div>
+                <div class="nav-links">
+                    
+                    <% if (user && user.admin) { %>
+                        <span class="members-admin-badge">Admin</span>
                     <% } %>
+                    <a href="/logout">Logout</a>
                 </div>
             </div>
-        <% }) %>
-    <% } else { %>
-        <p>No messages yet. Be the first to post!</p>
-    <% } %>
+        </nav>
 
+        <div class="content-page">
+            <!-- Welcome Header -->
+            <h1 class="members-welcome">Welcome back, <%= user ? user.first_name : 'Member' %>! 👋</h1>
+            
+            <!-- Two Column Layout -->
+            <div class="members-layout">
+                
+                <!-- Left Column - Add Message Form -->
+                <div class="members-form">
+                    <h3>✍️ New Message</h3>
+                    
+                    <% if (typeof error !== 'undefined' && error) { %>
+                        <div class="alert alert-error">
+                            <%= error %>
+                        </div>
+                    <% } %>
+                    
+                    <form action="/members-only" method="POST">
+                        <div class="form-group">
+                            <label for="title">Title:</label>
+                            <input type="text" id="title" name="title" required 
+                                   placeholder="Enter message title...">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="content">Message:</label>
+                            <textarea id="content" name="content" rows="4" required 
+                                     placeholder="What's on your mind?"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">
+                            📤 Post Message
+                        </button>
+                    </form>
+                </div>
 
-    <a href="/logout">Logout</a>
+                <!-- Right Column - Messages Display -->
+                <div class="members-messages">
+                    <div class="members-messages-header">
+                        <h3>💬 Community Messages</h3>
+                        <span class="members-messages-count">
+                            <%= typeof messages !== 'undefined' ? messages.length : 0 %> messages
+                        </span>
+                    </div>
+                    
+                    <div class="members-messages-scroll">
+                        <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+                            <% messages.forEach(message => { %>
+                                <div class="members-message-card">
+                                    <div class="members-message-header">
+                                        <div class="members-message-info">
+                                            <div class="members-message-title">
+                                                <%= message.title %>
+                                            </div>
+                                            <div class="members-message-meta">
+                                                <span class="members-message-author">
+                                                    <%= message.first_name %> <%= message.last_name %>
+                                                </span>
+                                                <span class="members-message-separator">•</span>
+                                                <span class="members-message-date">
+                                                    <%= new Date(message.created_at).toLocaleDateString('en-US', { 
+                                                        month: 'short', 
+                                                        day: 'numeric', 
+                                                        hour: '2-digit', 
+                                                        minute: '2-digit' 
+                                                    }) %>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <% if (user && (user.id === message.author_id || user.admin)) { %>
+                                            <div class="members-message-delete">
+                                                <form action="/members-only/delete/<%= message.id %>" method="POST" 
+                                                      onsubmit="return confirm('Are you sure you want to delete this message?')">
+                                                    <button type="submit" class="btn-delete">
+                                                        🗑️ Delete
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                    <div class="members-message-content">
+                                        <%= message.content %>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        <% } else { %>
+                            <div class="members-empty">
+                                <div class="members-empty-icon">💭</div>
+                                <p>No messages yet. Be the first to start a conversation!</p>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

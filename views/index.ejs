@@ -3,40 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOME | Members Only</title>
-    
+    <title>Members Only - Exclusive Community</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-    <div class="header">
-        <h1>Welcome to Members Only</h1>
-        <div>
-            <div>
-                <a href="/login">Login</a>
-            </div>
-            <div>
-                <a href="/sign-up">Register</a>
-            </div>
-        </div>
-        
-        
-    </div>
-    <div class="content">
-        <h3>Recent Messages</h3>
-    <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
-        <% messages.forEach(message => { %>
-            <div class="message">
-                <div class="message-header">
-                    <strong><%= message.title %></strong> - 
-                    
-                </div>
-                <p><%= message.content %></p>
-                
-            </div>
-        <% }) %>
-    <% } else { %>
-        <p>No messages yet. Be the first to post!</p>
-    <% } %>
+<body class="normal-layout">
+    <div class="container">
+        <header class="header">
+            <h1>🔐 Members Only</h1>
+            <p>Join our exclusive community of like-minded individuals</p>
+        </header>
 
+        <div class="content-page">
+            <section style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-size: 2.5rem; color: #4a5568; margin-bottom: 1rem;">
+                    Welcome to Our Community
+                </h2>
+                <p style="font-size: 1.1rem; color: #718096; max-width: 600px; margin: 0 auto;">
+                    Connect, share, and engage with members from around the world in a secure and private environment.
+                </p>
+            </section>
+
+            <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin: 3rem 0;">
+                <a href="/login" class="btn btn-primary">Login</a>
+                <a href="/sign-up" class="btn btn-secondary">Join Now</a>
+            </div>
+
+            <section class="features">
+                <div class="feature-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; color: #667eea;">👥</div>
+                    <h3 style="color: #4a5568; margin-bottom: 1rem; font-size: 1.3rem;">
+                        Exclusive Community
+                    </h3>
+                    <p style="color: #718096; line-height: 1.6;">
+                        Connect with verified members in a private, secure environment.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; color: #667eea;">💬</div>
+                    <h3 style="color: #4a5568; margin-bottom: 1rem; font-size: 1.3rem;">
+                        Rich Discussions
+                    </h3>
+                    <p style="color: #718096; line-height: 1.6;">
+                        Engage in meaningful conversations and share your thoughts.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div style="font-size: 3rem; margin-bottom: 1rem; color: #667eea;">🔒</div>
+                    <h3 style="color: #4a5568; margin-bottom: 1rem; font-size: 1.3rem;">
+                        Privacy First
+                    </h3>
+                    <p style="color: #718096; line-height: 1.6;">
+                        Your data and conversations are protected with top-tier security.
+                    </p>
+                </div>
+            </section>
+        </div>
     </div>
 </body>
 </html>

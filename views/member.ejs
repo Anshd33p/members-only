@@ -3,24 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-   
+    <title><%= title || 'Membership' %></title>
+    <link rel="stylesheet" href="/style.css">
 </head>
-<body>
-    <form action="/member" method="post">
-        <h1>Member Area</h1>
-        <% if (typeof errors !== 'undefined' && errors) { %>
-            <% errors.forEach(error => { %>
-                <div style="color: red;"><%= error.msg || error %></div>
-            <% }) %>
-        <% } else if (typeof error !== 'undefined' && error) { %>
-            <div style="color: red;"><%= error %></div>
-        <% } %>
+<body class="normal-layout">
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav">
+            <div class="nav-content">
+                <div class="logo">🔐 Members Only</div>
+                <div class="nav-links">
+                    
+                    <a href="/logout">Logout</a>
+                </div>
+            </div>
+        </nav>
 
-        <label for="memberCode">Member Code:</label>
-        <input type="text" id="memberCode" name="memberCode"
-               value="<%= typeof formData !== 'undefined' ? formData.memberCode || '' : '' %>" required>
-            <button type="submit">submit</button>
-    </form>
+        <div class="content-page">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h1 style="color: #4a5568; margin-bottom: 1rem;">Become a Member</h1>
+                <p style="color: #718096; font-size: 1.1rem;">
+                    Enter the secret code to unlock exclusive member content and discussions.
+                </p>
+            </div>
+            
+            <div class="form-container" style="max-width: 500px; margin: 0 auto;">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: #4a5568;">
+                    Enter Membership Code
+                </h3>
+                
+                <!-- Error messages -->
+                <% if (typeof error !== 'undefined' && error) { %>
+                    <div class="alert alert-error">
+                        <%= error %>
+                    </div>
+                <% } %>
+                
+                <!-- Success messages -->
+                <% if (typeof success !== 'undefined' && success) { %>
+                    <div class="alert alert-success">
+                        <%= success %>
+                    </div>
+                <% } %>
+                
+                <form action="/member" method="POST">
+                    <div class="form-group">
+                        <label for="memberCode">Secret Code:</label>
+                        <input type="text" id="memberCode" name="memberCode" 
+                               placeholder="Enter your membership code" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                        Unlock Membership
+                    </button>
+                </form>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; background: #f7fafc; border-radius: 10px; border-left: 4px solid #667eea;">
+                    <h4 style="color: #4a5568; margin-bottom: 1rem;">💡 Hint</h4>
+                    <p style="color: #718096; line-height: 1.6;">
+                        Look around the application or contact an existing member to get the secret code. 
+                        Members enjoy exclusive access to discussions and content!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
